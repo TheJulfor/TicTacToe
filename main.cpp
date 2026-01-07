@@ -7,6 +7,5 @@ int main() {
 
     Game game;
     initGame(game);
-    showBoard(game);
-    std::cout << "test";
+    gameLoop(game);
 }
