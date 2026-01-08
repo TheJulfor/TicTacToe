@@ -1,5 +1,6 @@
 #ifndef GAME
 #define GAME
+
 #include <vector>
 
 struct Game {

@@ -1,5 +1,6 @@
 #include "gameLogic.h"
 #include <iostream>
+#include <fstream>
 
 void initGame(Game &game) {
     game.board = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
@@ -11,7 +12,7 @@ void showBoard(Game &game) {
     std::cout << " ━━━╋━━━╋━━━ \n";
     std::cout << "  " << game.board[1][0] << " ┃ " << game.board[1][1] << " ┃ " << game.board[1][2] << "\n";
     std::cout << " ━━━╋━━━╋━━━ \n";
-    std::cout << "  " << game.board[2][0] << " ┃ " << game.board[2][1] << " ┃ " << game.board[2][2] << "\n";
+    std::cout << "  " << game.board[2][0] << " ┃ " << game.board[2][1] << " ┃ " << game.board[2][2] << "\n\n";
 }
 
 bool checkWin(Game &game) {
@@ -50,20 +51,16 @@ bool checkDraw(Game &game) {
 }
 
 void makeMove(Game &game) {
-    int choice;
+    std::string input;
     std::cout << "Игрок " << game.player << ", укажите номер клетки (1-9): ";
-    if (!(std::cin >> choice)) {
-        std::cin.clear();
-        while (std::cin.get() != '\n');
+    std::getline(std::cin, input);
+
+    if (input.length() != 1 || !std::isdigit(input[0])) {
         std::cout << "Неверный ввод! Выберите клетку от 1 до 9.\n\n";
         return;
     }
 
-    if (choice < 1 || choice > 9) {
-        std::cout << "Неверный ввод! Выберите клетку от 1 до 9.\n\n";
-        return;
-    }
-
+    int choice = std::stoi(input);
     int x = (choice - 1) / 3;
     int y = (choice - 1) % 3;
 
@@ -85,7 +82,7 @@ void gameLoop(Game &game) {
         char currentPlayer = (game.player == 'X') ? 'O' : 'X';
         if (checkWin(game)) {
             showBoard(game);
-            std::cout << "Победа! Игрок " << currentPlayer << " выиграл!\n";
+            std::cout << "Игра окончена! Игрок " << currentPlayer << " победил!\n";
             gameOver = true;
         }
         else if (checkDraw(game)) {
