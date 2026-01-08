@@ -50,34 +50,41 @@ bool checkDraw(Game &game) {
     return true;
 }
 
-void makeMove(Game &game) {
+bool makeMove(Game &game) {
     std::string input;
-    std::cout << "Игрок " << game.player << ", укажите номер клетки (1-9): ";
+    std::cout << "Игрок " << game.player << ", укажите номер клетки (1-9) или выйдите в главное меню (0): ";
     std::getline(std::cin, input);
 
     if (input.length() != 1 || !std::isdigit(input[0])) {
         std::cout << "Неверный ввод! Выберите клетку от 1 до 9.\n\n";
-        return;
+        return true;
     }
 
     int choice = std::stoi(input);
+    if (choice == 0) {
+        std::cout << "Выход в главное меню...\n\n";
+        return false;
+    }
+
     int x = (choice - 1) / 3;
     int y = (choice - 1) % 3;
 
     if (game.board[x][y] != ' ') {
         std::cout << "Клетка уже занята!\n\n";
-        return;
+        return true;
     }
 
     game.board[x][y] = game.player;
     game.player = (game.player == 'X') ? 'O' : 'X';
+    return true;
 }
 
 void gameLoop(Game &game) {
     bool gameOver = false;
     while (!gameOver) {
         showBoard(game);
-        makeMove(game);
+
+        if (!makeMove(game)) break;
 
         char currentPlayer = (game.player == 'X') ? 'O' : 'X';
         if (checkWin(game)) {
