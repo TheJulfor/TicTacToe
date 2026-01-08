@@ -5,4 +5,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(tictactoe main.cpp
         gameLogic.cpp
-        gameLogic.h)
+        gameLogic.h
+        saving.cpp
+        saving.h)
