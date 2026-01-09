@@ -4,12 +4,12 @@
 #include <array>
 
 struct Game {
-    std::array<std::array<char, 3>, 3> board;
+    std::array<std::array<char, 3>, 3> board{};
     char player = 'X';
 };
 
 void initGame(Game &game);
-void showBoard(Game &game);
+void showBoard(const Game &game);
 bool checkWin(Game &game);
 bool checkDraw(Game &game);
 bool makeMove(Game &game);

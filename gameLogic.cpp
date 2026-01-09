@@ -9,7 +9,7 @@ void initGame(Game &game) {
     game.player = 'X';
 }
 
-void showBoard(Game &game) {
+void showBoard(const Game &game) {
     std::cout << "  " << game.board[0][0] << " ┃ " << game.board[0][1] << " ┃ " << game.board[0][2] << "\n";
     std::cout << " ━━━╋━━━╋━━━ \n";
     std::cout << "  " << game.board[1][0] << " ┃ " << game.board[1][1] << " ┃ " << game.board[1][2] << "\n";
@@ -17,7 +17,7 @@ void showBoard(Game &game) {
     std::cout << "  " << game.board[2][0] << " ┃ " << game.board[2][1] << " ┃ " << game.board[2][2] << "\n\n";
 }
 
-bool checkWin(Game &game) {
+bool checkWin(const Game &game) {
     for (int i = 0; i < 3; i++) { // rows
         if (game.board[i][0] == game.board[i][1] && game.board[i][1] == game.board[i][2]) {
             if (game.board[i][0] == 'X' || game.board[i][0] == 'O') return true;
@@ -41,7 +41,7 @@ bool checkWin(Game &game) {
     return false;
 }
 
-bool checkDraw(Game &game) {
+bool checkDraw(const Game &game) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             if (game.board[i][j] != 'X' && game.board[i][j] != 'O') {
@@ -68,8 +68,15 @@ bool makeMove(Game &game) {
         return false;
     }
 
-    int x = (choice - 1) / 3;
-    int y = (choice - 1) % 3;
+    // Convert choice to board coordinates
+    // Subtract 1 to convert number to index (1-9 to 0-8)
+    int index = choice - 1;
+
+    // Row - integer division
+    int x = index / 3;
+
+    // Column - remainder of division
+    int y = index % 3;
 
     if (game.board[x][y] != ' ') {
         std::cout << "Клетка уже занята!\n\n";
@@ -88,7 +95,7 @@ void gameLoop(Game &game) {
         if (!makeMove(game)) break;
         saveGame(game);
 
-        char currentPlayer = (game.player == 'X') ? 'O' : 'X';
+        const char currentPlayer = (game.player == 'X') ? 'O' : 'X';
         if (checkWin(game)) {
             showBoard(game);
             std::cout << "Игра окончена! Игрок " << currentPlayer << " победил!\n\n";

@@ -1,7 +1,7 @@
 #include "saving.h"
 #include <fstream>
 
-void saveGame(Game &game) {
+void saveGame(const Game &game) {
     std::ofstream ofile("save.txt");
     if (ofile.is_open()) {
         ofile << game.player << "\n";
@@ -42,7 +42,7 @@ bool loadGame(Game &game) {
     return false;
 }
 
-bool validateGameSave(Game &tempGame) {
+bool validateGameSave(const Game &tempGame) {
     if (tempGame.player != 'X' && tempGame.player != 'O') return false;
 
     for (int i = 0; i < 3; i++) {
