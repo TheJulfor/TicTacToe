@@ -10,8 +10,8 @@ struct Game {
 
 void initGame(Game &game);
 void showBoard(const Game &game);
-bool checkWin(Game &game);
-bool checkDraw(Game &game);
+bool checkWin(const Game &game);
+bool checkDraw(const Game &game);
 bool makeMove(Game &game);
 void gameLoop(Game &game);
 

@@ -39,6 +39,7 @@ bool loadGame(Game &game) {
         game = tempGame;
         return true;
     }
+    std::remove("save.txt");
     return false;
 }
 

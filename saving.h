@@ -4,6 +4,6 @@
 
 void saveGame(const Game &game);
 bool loadGame(Game &game);
-bool validateGameSave(Game &tempGame);
+bool validateGameSave(const Game &tempGame);
 
 #endif
