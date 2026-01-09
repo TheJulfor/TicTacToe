@@ -1,10 +1,10 @@
 #ifndef GAME
 #define GAME
 
-#include <vector>
+#include <array>
 
 struct Game {
-    std::vector<std::vector<char>> board;
+    std::array<std::array<char, 3>, 3> board;
     char player = 'X';
 };
 

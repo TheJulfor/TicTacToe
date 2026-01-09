@@ -1,6 +1,5 @@
 #include "saving.h"
 #include <fstream>
-#include <vector>
 
 void saveGame(Game &game) {
     std::ofstream ofile("save.txt");
@@ -21,7 +20,7 @@ bool loadGame(Game &game) {
     if (!ifile.is_open()) return false;
 
     Game tempGame;
-    tempGame.board = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+    tempGame.board = {{ {{' ', ' ', ' '}}, {{' ', ' ', ' '}}, {{' ', ' ', ' '}} }};
 
     char player;
     if (!(ifile >> player)) return false;

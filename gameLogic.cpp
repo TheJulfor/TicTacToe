@@ -5,7 +5,7 @@
 #include "saving.h"
 
 void initGame(Game &game) {
-    game.board = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+    game.board = {{ {{' ', ' ', ' '}}, {{' ', ' ', ' '}}, {{' ', ' ', ' '}} }};
     game.player = 'X';
 }
 
@@ -91,13 +91,13 @@ void gameLoop(Game &game) {
         char currentPlayer = (game.player == 'X') ? 'O' : 'X';
         if (checkWin(game)) {
             showBoard(game);
-            std::cout << "Игра окончена! Игрок " << currentPlayer << " победил!\n";
+            std::cout << "Игра окончена! Игрок " << currentPlayer << " победил!\n\n";
             gameOver = true;
             std::remove("save.txt");
         }
         else if (checkDraw(game)) {
             showBoard(game);
-            std::cout << "Ничья! Свободных клеток не осталось.\n";
+            std::cout << "Ничья! Свободных клеток не осталось.\n\n";
             gameOver = true;
             std::remove("save.txt");
         }
