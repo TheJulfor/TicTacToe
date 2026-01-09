@@ -56,6 +56,7 @@ bool makeMove(Game &game) {
     std::string input;
     std::cout << "Игрок " << game.player << ", укажите номер клетки (1-9) или выйдите в главное меню (0): ";
     std::getline(std::cin, input);
+    std::cout << std::endl;
 
     if (input.length() != 1 || !std::isdigit(input[0])) {
         std::cout << "Неверный ввод! Выберите клетку от 1 до 9.\n\n";
